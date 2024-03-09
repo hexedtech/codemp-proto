@@ -36,12 +36,37 @@ pub mod files {
 pub mod buffer {
 	tonic::include_proto!("buffer");
 }
+
 pub mod cursor {
 	tonic::include_proto!("cursor");
+
+	impl From<RowCol> for (i32, i32) {
+		fn from(pos: RowCol) -> (i32, i32) {
+			(pos.row, pos.col)
+		}
+	}
+
+	impl From<(i32, i32)> for RowCol {
+		fn from((row, col): (i32, i32)) -> Self {
+			RowCol { row, col }
+		}
+	}
+
+	impl PartialOrd for RowCol {
+		fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+			match self.row.partial_cmp(&other.row) {
+				Some(core::cmp::Ordering::Equal) => {}
+				ord => return ord,
+			}
+			self.col.partial_cmp(&other.col)
+		}
+	}
 }
+
 pub mod workspace {
 	tonic::include_proto!("workspace");
 }
+
 pub mod auth {
 	tonic::include_proto!("auth");
 }
