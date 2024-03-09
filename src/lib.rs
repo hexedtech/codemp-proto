@@ -7,6 +7,24 @@ pub mod common {
 			Identity { id: id.to_string() }
 		}
 	}
+
+	impl From<&uuid::Uuid> for Identity {
+		fn from(id: &uuid::Uuid) -> Self {
+			Identity { id: id.to_string() }
+		}
+	}
+
+	impl From<Identity> for uuid::Uuid {
+		fn from(value: Identity) -> Self {
+			uuid::Uuid::parse_str(&value.id).expect("invalid uuid in identity")
+		}
+	}
+
+	impl From<&Identity> for uuid::Uuid {
+		fn from(value: &Identity) -> Self {
+			uuid::Uuid::parse_str(&value.id).expect("invalid uuid in identity")
+		}
+	}
 }
 
 pub mod files {
