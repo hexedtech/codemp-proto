@@ -4,8 +4,8 @@ package auth;
 
 // authenticates users, issuing tokens
 service Auth {
-  // send credentials and join a workspace, returns ready to use token
-  rpc Login (WorkspaceJoinRequest)    returns (Token);
+	// send credentials and join a workspace, returns ready to use token
+	rpc Login (WorkspaceJoinRequest) returns (Token);
 }
 
 message Token {
@@ -14,7 +14,7 @@ message Token {
 
 // TODO one-request-to-do-it-all from login to workspace access
 message WorkspaceJoinRequest {
-  required string username = 1;
-  required string password = 2;
-  optional string workspace_id = 3;
+	required string username = 1;
+	required string password = 2;
+	optional string workspace_id = 3;
 }

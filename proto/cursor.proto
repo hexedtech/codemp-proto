@@ -10,7 +10,6 @@ service Cursor {
 	rpc Attach (stream cursor.CursorPosition) returns (stream cursor.CursorEvent);
 }
 
-
 // a tuple indicating row and column
 message RowCol {
 	required int32 row = 1;

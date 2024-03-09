@@ -14,7 +14,7 @@ pub mod proto {
 				Identity { id: id.to_string() }
 			}
 		}
-	
+
 		impl From<Identity> for uuid::Uuid {
 			fn from(value: Identity) -> Self {
 				uuid::Uuid::parse_str(&value.id).expect("invalid uuid in identity")
@@ -28,7 +28,6 @@ pub mod proto {
 		}
 	}
 
-
 	pub mod files {
 		tonic::include_proto!("files");
 
@@ -40,7 +39,9 @@ pub mod proto {
 
 		impl From<&str> for BufferNode {
 			fn from(value: &str) -> Self {
-				BufferNode { path: value.to_string() }
+				BufferNode {
+					path: value.to_string(),
+				}
 			}
 		}
 
@@ -51,8 +52,16 @@ pub mod proto {
 		}
 	}
 
-	pub mod buffer { tonic::include_proto!("buffer"); }
-	pub mod cursor { tonic::include_proto!("cursor"); }
-	pub mod workspace { tonic::include_proto!("workspace"); }
-	pub mod auth { tonic::include_proto!("auth"); }
+	pub mod buffer {
+		tonic::include_proto!("buffer");
+	}
+	pub mod cursor {
+		tonic::include_proto!("cursor");
+	}
+	pub mod workspace {
+		tonic::include_proto!("workspace");
+	}
+	pub mod auth {
+		tonic::include_proto!("auth");
+	}
 }

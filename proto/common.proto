@@ -2,7 +2,6 @@ syntax = "proto2";
 
 package common;
 
-
 // a wrapper payload representing an uuid
 message Identity {
 	// uuid bytes, as string
