@@ -7,7 +7,7 @@ import "common.proto";
 // service entrypoint, authenticate users and grant initial token
 service Auth {
 	// send credentials, returns empty valid token
-	rpc Login (LoginRequest) returns (common.Token);
+	rpc Login (LoginRequest) returns (LoginResponse);
 
 	// if given token has just expired, get a new valid one
 	rpc Refresh (common.Token) returns (common.Token);
@@ -16,4 +16,9 @@ service Auth {
 message LoginRequest {
 	required string username = 1;
 	required string password = 2;
+}
+
+message LoginResponse {
+	required common.Token token = 1;
+	required common.User user = 2;
 }
