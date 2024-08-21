@@ -4,25 +4,27 @@ pub mod common {
 
 	impl From<uuid::Uuid> for Identity {
 		fn from(id: uuid::Uuid) -> Self {
-			Identity { id: id.to_string() }
+			let (hi, lo) = id.as_u64_pair();
+			Identity { hi, lo }
 		}
 	}
 
 	impl From<&uuid::Uuid> for Identity {
 		fn from(id: &uuid::Uuid) -> Self {
-			Identity { id: id.to_string() }
+			let (hi, lo) = id.as_u64_pair();
+			Identity { hi, lo }
 		}
 	}
 
 	impl From<Identity> for uuid::Uuid {
 		fn from(value: Identity) -> Self {
-			uuid::Uuid::parse_str(&value.id).expect("invalid uuid in identity")
+			uuid::Uuid::from_u64_pair(value.hi, value.lo)
 		}
 	}
 
 	impl From<&Identity> for uuid::Uuid {
 		fn from(value: &Identity) -> Self {
-			uuid::Uuid::parse_str(&value.id).expect("invalid uuid in identity")
+			uuid::Uuid::from_u64_pair(value.hi, value.lo)
 		}
 	}
 }

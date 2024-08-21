@@ -4,8 +4,8 @@ package common;
 
 // a wrapper payload representing an uuid
 message Identity {
-	// uuid bytes, as string
-	required string id = 1;
+	required uint64 hi = 1;
+	required uint64 lo = 2;
 }
 
 // a collection of identities
