@@ -2,19 +2,18 @@ syntax = "proto2";
 
 package auth;
 
-// authenticates users, issuing tokens
+import "common.proto";
+
+// service entrypoint, authenticate users and grant initial token
 service Auth {
-	// send credentials and join a workspace, returns ready to use token
-	rpc Login (WorkspaceJoinRequest) returns (Token);
+	// send credentials, returns empty valid token
+	rpc Login (LoginRequest) returns (common.Token);
+
+	// if given token has just expired, get a new valid one
+	rpc Refresh (common.Token) returns (common.Token);
 }
 
-message Token {
-	required string token = 1;
-}
-
-// TODO one-request-to-do-it-all from login to workspace access
-message WorkspaceJoinRequest {
+message LoginRequest {
 	required string username = 1;
 	required string password = 2;
-	optional string workspace_id = 3;
 }

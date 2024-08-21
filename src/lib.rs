@@ -27,6 +27,12 @@ pub mod common {
 			uuid::Uuid::from_u64_pair(value.hi, value.lo)
 		}
 	}
+
+	impl Identity {
+		pub fn uuid(&self) -> uuid::Uuid {
+			uuid::Uuid::from(self)
+		}
+	}
 }
 
 pub mod files {
@@ -85,6 +91,10 @@ pub mod cursor {
 
 pub mod workspace {
 	tonic::include_proto!("workspace");
+}
+
+pub mod session {
+	tonic::include_proto!("session");
 }
 
 pub mod auth {

@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+package session;
+
+import "common.proto";
+
+// manage user workspaces, refresh tokens
+service Session {
+	rpc AccessWorkspace (WorkspaceRequest) returns (common.Token);
+	rpc CreateWorkspace (WorkspaceRequest) returns (common.Empty);
+	rpc DeleteWorkspace (WorkspaceRequest) returns (common.Empty);
+	rpc ListWorkspaces (common.Empty) returns (WorkspaceList);
+	rpc InviteToWorkspace (InviteRequest) returns (common.Empty);
+}
+
+message WorkspaceRequest {
+	required string workspace = 1;
+}
+
+message WorkspaceList {
+	repeated string owned = 1;
+	repeated string invited = 2;
+}
+
+message InviteRequest {
+	required string user = 1;
+	required string workspace = 2;
+}

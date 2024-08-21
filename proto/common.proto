@@ -2,15 +2,20 @@ syntax = "proto2";
 
 package common;
 
+// authentication token, probably a JWT but should be treated as a raw string
+message Token {
+	required string token = 1;
+}
+
 // a wrapper payload representing an uuid
 message Identity {
 	required uint64 hi = 1;
 	required uint64 lo = 2;
 }
 
-// a collection of identities
-message IdentityList {
-	repeated Identity users = 1;
+message User {
+	required Identity id = 1;
+	optional string name = 2;
 }
 
 //generic Empty message

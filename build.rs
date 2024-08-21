@@ -5,6 +5,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 			"proto/cursor.proto",
 			"proto/files.proto",
 			"proto/auth.proto",
+			"proto/session.proto",
 			"proto/workspace.proto",
 			"proto/buffer.proto",
 		],
