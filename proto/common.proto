@@ -15,8 +15,8 @@ message Identity {
 
 message User {
 	required Identity id = 1;
-	optional string name = 2;
+	required string name = 2;
 }
 
-//generic Empty message
+// generic Empty message
 message Empty { }
