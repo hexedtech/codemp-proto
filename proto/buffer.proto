@@ -4,17 +4,22 @@ import "common.proto";
 
 package buffer;
 
-// handle buffer changes, keep in sync users
+// Handles buffer changes and keeps users in sync.
 service Buffer {
-	// attach to a buffer and receive operations
+	// Attach to a buffer and receive operations.
 	rpc Attach (stream Operation) returns (stream BufferEvent);
 }
 
+// Message representing an operation that has occurred.
 message Operation {
+	// The data of this operation.
 	required bytes data = 1;
 }
 
+// Message representing an event that happened in a buffer.
 message BufferEvent {
+	// The operation that occurred.
 	required Operation op = 1;
+	// The user that sent this event.
 	required common.Identity user = 2;
 }

@@ -4,21 +4,27 @@ package auth;
 
 import "common.proto";
 
-// service entrypoint, authenticate users and grant initial token
+// Server entrypoint, authenticates users and grants initial session token.
 service Auth {
-	// send credentials, returns empty valid token
+	// Send credentials, returns valid session token.
 	rpc Login (LoginRequest) returns (LoginResponse);
 
-	// if given token has just expired, get a new valid one
+	// If the given token has recently expired, get a new valid one.
 	rpc Refresh (common.Token) returns (common.Token);
 }
 
+// The login request message.
 message LoginRequest {
+	// The username to log in with.
 	required string username = 1;
+	// The password to log in with.
 	required string password = 2;
 }
 
+// The login response message.
 message LoginResponse {
+	// The newly created session token.
 	required common.Token token = 1;
+	// The user profile that has been authenticated.
 	required common.User user = 2;
 }

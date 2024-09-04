@@ -2,10 +2,14 @@ syntax = "proto2";
 
 package files;
 
+// A message representing a node in the filetree.
 message BufferNode {
+	// The path of a buffer.
 	required string path = 1;
 }
 
+// A message representing a filetree.
 message BufferTree {
+	// A vector of buffer nodes.
 	repeated BufferNode buffers = 1;
 }

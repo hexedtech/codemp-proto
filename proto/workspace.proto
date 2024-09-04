@@ -5,40 +5,61 @@ package workspace;
 import "common.proto";
 import "files.proto";
 
+// Handles workspace state management.
 service Workspace {
+	// Attach to a workspace.
 	rpc Attach (common.Empty) returns (stream WorkspaceEvent);
-	
+	// Create a buffer within the workspace.
 	rpc CreateBuffer (files.BufferNode) returns (common.Empty);
+	// Access a buffer within the workspace and returns a buffer token for it.
 	rpc AccessBuffer (files.BufferNode) returns (common.Token);
+	// Delete a buffer.
 	rpc DeleteBuffer (files.BufferNode) returns (common.Empty);
-
+	// List buffers in the workspace.
 	rpc ListBuffers (common.Empty) returns (files.BufferTree); 
+	// List users in the workspace.
 	rpc ListUsers (common.Empty) returns (UserList);
+	// List users within a given buffer.
 	rpc ListBufferUsers (files.BufferNode) returns (UserList);
 }
 
+// A message representing a list of users.
 message UserList {
+	// A vector of users.
 	repeated common.User users = 1;
 }
 
+// A message representing a workspace event.
 message WorkspaceEvent {
+	// Event that occurs when a user joins a workspace.
 	message UserJoin {
+		// The user that joined.
 		required common.User user = 1;
 	}
+	// Event that occurs when a user leaves a workspace.
 	message UserLeave {
+		// The user that left.
 		required common.User user = 1;
 	}
+	// Event that occurs when a file is created in a workspace.
 	message FileCreate {
+		// The path of the created file.
 		required string path = 1;
 	}
+	// Event that occurs when a file is renamed in a workspace.
 	message FileRename {
+		// The old path of the file.
 		required string before = 1;
+		// The new path of the file.
 		required string after = 2;
 	}
+	// Event that occurs when a file is deleted in a workspace.
 	message FileDelete {
+		// The path of the deleted file
 		required string path = 1;
 	}
 
+	// The union containing actual event.
 	oneof event {
 		UserJoin join = 1;
 		UserLeave leave = 2;

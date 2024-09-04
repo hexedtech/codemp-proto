@@ -4,25 +4,38 @@ package session;
 
 import "common.proto";
 
-// manage user workspaces, refresh tokens
+// Manages user workspaces and refreshes tokens.
 service Session {
+	// Handle a workspace access request and return a workspace token.
 	rpc AccessWorkspace (WorkspaceRequest) returns (common.Token);
+	// Create a workspace.
 	rpc CreateWorkspace (WorkspaceRequest) returns (common.Empty);
+	// Delete a workspace.
 	rpc DeleteWorkspace (WorkspaceRequest) returns (common.Empty);
+	// List all available workspaces.
 	rpc ListWorkspaces (common.Empty) returns (WorkspaceList);
+	// Handle a workspace invite request.
 	rpc InviteToWorkspace (InviteRequest) returns (common.Empty);
 }
 
+// A message representing a request for specific workspace.
 message WorkspaceRequest {
+	// The name of the workspace.
 	required string workspace = 1;
 }
 
+// A message representing a list of workspaces.
 message WorkspaceList {
+	// A vector of workspaces owned by the user.
 	repeated string owned = 1;
+	// A vector of workspaces the user is invited to.
 	repeated string invited = 2;
 }
 
+// A message representing an invitation to a workspace.
 message InviteRequest {
+	// The user the invitation is for.
 	required string user = 1;
+	// the workspace the invitation is for
 	required string workspace = 2;
 }

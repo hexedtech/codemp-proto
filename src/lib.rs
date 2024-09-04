@@ -1,3 +1,10 @@
+//! # CodeMP Protocol - cooperative development
+//! `codemp-proto` is the gRPC protocol specification powering [`codemp`](https://codemp.dev).
+//!
+//! This is built on top of [tonic] and provides both clientside and serverside service
+//! implementations.
+
+/// common types across services
 #[allow(non_snake_case)]
 pub mod common {
 	tonic::include_proto!("common");
@@ -35,6 +42,7 @@ pub mod common {
 	}
 }
 
+/// filetree related types
 pub mod files {
 	tonic::include_proto!("files");
 
@@ -59,10 +67,12 @@ pub mod files {
 	}
 }
 
+/// buffer synchronisation protocol types and procedures
 pub mod buffer {
 	tonic::include_proto!("buffer");
 }
 
+/// cursor position protocol types and procedures
 pub mod cursor {
 	tonic::include_proto!("cursor");
 
@@ -89,14 +99,17 @@ pub mod cursor {
 	}
 }
 
+/// workspace state protocol types and procedures
 pub mod workspace {
 	tonic::include_proto!("workspace");
 }
 
+/// session management protocol types and procedures
 pub mod session {
 	tonic::include_proto!("session");
 }
 
+/// authentication and authorization protocol types and procedures
 pub mod auth {
 	tonic::include_proto!("auth");
 }
