@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/hexedtech/codemp"><img alt="codemp logo" src="https://codemp.dev/static/codemp-banner.png" height="100"/></a></p>
+[![codemp](https://codemp.dev/static/codemp-banner.png)](https://github.com/hexedtech/codemp)
 
 # Protocol
 gRPC protocol specification for [`codemp`](https://github.com/hexedtech/codemp).
