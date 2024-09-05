@@ -1,4 +1,9 @@
-<p align="center"><a href="https://github.com/hexedtech/codemp"><img alt="codemp logo" src="https://codemp.dev/static/codemp-banner.png" height="100"/></a></p>
+[![codemp](https://codemp.dev/static/banner.png)](https://codemp.dev)
+
+> `codemp` is a **collaborative** text editing solution to work remotely.
+
+It seamlessly integrates in your editor providing remote cursors and instant text synchronization,
+as well as a remote virtual workspace for you and your team.
 
 # Protocol
 gRPC protocol specification for [`codemp`](https://github.com/hexedtech/codemp).
