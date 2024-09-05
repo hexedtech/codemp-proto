@@ -1,5 +1,10 @@
 [![codemp](https://codemp.dev/static/banner.png)](https://codemp.dev)
 
+[![Actions Status](https://github.com/hexedtech/codemp-proto/actions/workflows/ci.yml/badge.svg)](https://github.com/hexedtech/codemp-proto/actions)
+[![Gitter](https://img.shields.io/gitter/room/hexedtech/codemp-proto)](https://gitter.im/hexedtech/codemp-proto)
+[![Crates.io Version](https://img.shields.io/crates/v/codemp-proto)](https://crates.io/crates/codemp-proto)
+[![Crates.io License](https://img.shields.io/crates/l/codemp-proto)](https://github.com/hexedtech/codemp-proto/blob/dev/LICENSE)
+
 > `codemp` is a **collaborative** text editing solution to work remotely.
 
 It seamlessly integrates in your editor providing remote cursors and instant text synchronization,
