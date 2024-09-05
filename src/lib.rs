@@ -3,6 +3,7 @@
 //!
 //! This is built on top of [tonic] and provides both clientside and serverside service
 //! implementations.
+#![doc(html_logo_url = "https://codemp.dev/logo-round.png")]
 
 /// common types across services
 #[allow(non_snake_case)]
