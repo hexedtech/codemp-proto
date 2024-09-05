@@ -1,5 +1,14 @@
 [package]
 name = "codemp-proto"
+description = "protocol definitions for codemp -- code multiplexer"
+homepage = "https://codemp.dev"
+authors = [
+	"alemi <me@alemi.dev>",
+	"zaaarf <me@zaaarf.foo>",
+	"frelodev <frelodev@gmail.com>",
+	"cschen <cschen@codemp.dev>"
+]
+license = "GPL-3.0-only"
 version = "0.7.0"
 edition = "2021"
 
