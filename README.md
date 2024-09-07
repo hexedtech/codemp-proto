@@ -1,4 +1,4 @@
-[![codemp](https://codemp.dev/static/banner.png)](https://codemp.dev)
+[![codemp](https://code.mp/static/banner.png)](https://code.mp)
 
 [![Actions Status](https://github.com/hexedtech/codemp-proto/actions/workflows/ci.yml/badge.svg)](https://github.com/hexedtech/codemp-proto/actions)
 [![Crates.io Version](https://img.shields.io/crates/v/codemp-proto)](https://crates.io/crates/codemp-proto)
