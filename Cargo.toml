@@ -26,5 +26,5 @@ tonic-build = "0.12"
 
 [features]
 default = ["client"]
-client = []
-server = []
+client = ["tonic/transport"]
+server = ["tonic/transport"]
