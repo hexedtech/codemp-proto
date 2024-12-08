@@ -20,7 +20,7 @@ service Session {
 
 // A message representing a request for specific workspace.
 message WorkspaceRequest {
-	// The name of the workspace.
+	// The workspace's id
 	required string workspace = 1;
 }
 
@@ -36,6 +36,6 @@ message WorkspaceList {
 message InviteRequest {
 	// The user the invitation is for.
 	required string user = 1;
-	// the workspace the invitation is for
+	// the workspace's id the invitation is for
 	required string workspace = 2;
 }
