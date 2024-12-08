@@ -12,8 +12,10 @@ service Session {
 	rpc CreateWorkspace (WorkspaceRequest) returns (common.Empty);
 	// Delete a workspace.
 	rpc DeleteWorkspace (WorkspaceRequest) returns (common.Empty);
-	// List all available workspaces.
-	rpc ListWorkspaces (common.Empty) returns (WorkspaceList);
+	// List all workspaces the user has been invited to.
+	rpc FetchInvitedWorkspaces (common.Empty) returns (WorkspacesInvitedList);
+	//List all workspaces the user owns
+	rpc FetchOwnedWorkspaces (common.Empty) returns (WorkspacesOwnedList);
 	// Handle a workspace invite request.
 	rpc InviteToWorkspace (InviteRequest) returns (common.Empty);
 }
@@ -25,11 +27,15 @@ message WorkspaceRequest {
 }
 
 // A message representing a list of workspaces.
-message WorkspaceList {
+message WorkspacesInvitedList {
+	// A vector of workspaces the user is invited to.
+	repeated string invited = 1;
+}
+
+// A message representing a list of workspaces.
+message WorkspacesOwnedList {
 	// A vector of workspaces owned by the user.
 	repeated string owned = 1;
-	// A vector of workspaces the user is invited to.
-	repeated string invited = 2;
 }
 
 // A message representing an invitation to a workspace.
