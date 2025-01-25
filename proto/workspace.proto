@@ -21,6 +21,8 @@ service Workspace {
 	rpc ListUsers (common.Empty) returns (UserList);
 	// List users within a given buffer.
 	rpc FetchBufferUsers (files.BufferNode) returns (UserList);
+	// Revokes all invites and kicks all active users.
+	rpc KickAll (common.Empty) returns (common.Empty);
 }
 
 // A message representing a list of users.
