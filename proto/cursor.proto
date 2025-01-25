@@ -31,7 +31,7 @@ message CursorPosition {
 // A message representing a cursor event.
 message CursorEvent {
 	// The user moving the cursor.
-	required common.Identity user = 1;
+	required common.Identifier user = 1;
 	// The new cursor position.
 	repeated CursorPosition position = 2;
 }
