@@ -19,7 +19,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 			.build_server(server)
 			.build_client(client)
 			.build_transport(transport)
-			.compile_protos(
+			.compile(
 				&[
 					"proto/common.proto",
 					"proto/cursor.proto",
