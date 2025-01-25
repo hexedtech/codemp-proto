@@ -33,5 +33,5 @@ message CursorEvent {
 	// The user moving the cursor.
 	required common.Identity user = 1;
 	// The new cursor position.
-	required CursorPosition position = 2;
+	repeated CursorPosition position = 2;
 }
