@@ -46,26 +46,6 @@ pub mod common {
 /// filetree related types
 pub mod files {
 	tonic::include_proto!("files");
-
-	impl From<String> for BufferNode {
-		fn from(value: String) -> Self {
-			BufferNode { path: value }
-		}
-	}
-
-	impl From<&str> for BufferNode {
-		fn from(value: &str) -> Self {
-			BufferNode {
-				path: value.to_string(),
-			}
-		}
-	}
-
-	impl From<BufferNode> for String {
-		fn from(value: BufferNode) -> Self {
-			value.path
-		}
-	}
 }
 
 /// buffer synchronisation protocol types and procedures

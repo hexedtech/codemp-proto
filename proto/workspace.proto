@@ -14,9 +14,9 @@ service Workspace {
 	// Access a buffer within the workspace and returns a buffer token for it.
 	rpc AccessBuffer (files.BufferNode) returns (common.Token);
 	// Delete a buffer.
-	rpc DeleteBuffer (files.BufferNode) returns (common.Empty);
+	rpc DeleteBuffer (files.BufferRequest) returns (common.Empty);
 	// List buffers in the workspace.
-	rpc ListBuffers (common.Empty) returns (files.BufferTree); 
+	rpc ListBuffers (files.BufferRequest) returns (files.BufferTree); 
 	// List users in the workspace.
 	rpc ListUsers (common.Empty) returns (UserList);
 	// List users within a given buffer.
@@ -47,6 +47,8 @@ message WorkspaceEvent {
 	message FileCreate {
 		// The path of the created file.
 		required string path = 1;
+		// Whether the buffer is ephemeral.
+		required bool ephemeral = 2;
 	}
 	// Event that occurs when a file is renamed in a workspace.
 	message FileRename {
