@@ -20,7 +20,7 @@ service Workspace {
 	// List users in the workspace.
 	rpc ListUsers (common.Empty) returns (UserList);
 	// List users within a given buffer.
-	rpc ListBufferUsers (files.BufferNode) returns (UserList);
+	rpc FetchBufferUsers (files.BufferNode) returns (UserList);
 }
 
 // A message representing a list of users.
