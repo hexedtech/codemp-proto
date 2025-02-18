@@ -6,6 +6,8 @@ import "common.proto";
 
 // Manages user workspaces and refreshes tokens.
 service Session {
+
+	rpc getEvents (common.Empty) returns (stream SessionEvent);
 	// Handle a workspace access request and return a workspace token.
 	rpc AccessWorkspace (WorkspaceRequest) returns (common.Token);
 	// Create a workspace.
@@ -49,4 +51,28 @@ message InviteRequest {
 	required string user = 1;
 	// the workspace the invitation is for
 	required common.Identifier workspace = 2;
+}
+
+// A message representing a session event.
+message SessionEvent {
+	// Event that occurs when you get invited to a workspace
+	message InvitationEvent {
+		// The user that invited you.
+		required common.User user = 1;
+	}
+	// Event that occurs when a user leaves a workspace.
+	message LeaveEvent {
+		// The user that left.
+		required common.User user = 1;
+	}
+	// Event that occurs when an user joins in a workspace you are in
+	message JoinEvent {
+		// The user that joined.
+		required common.User user = 1;
+	}
+	oneof event {
+		InvitationEvent invite = 1;
+		LeaveEvent leave = 2;
+		JoinEvent join = 3;
+	}
 }
