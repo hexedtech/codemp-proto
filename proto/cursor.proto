@@ -6,6 +6,8 @@ import "files.proto";
 
 // Handles cursor events and broadcasts them to all users.
 service Cursor {
+
+	rpc List(common.Empty) returns (CursorEventList);
 	// Subscribe to a workspace's cursor events.
 	rpc Attach (stream cursor.CursorPosition) returns (stream cursor.CursorEvent);
 }
