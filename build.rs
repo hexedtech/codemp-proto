@@ -14,8 +14,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 		#[cfg(not(any(feature = "server", feature = "client")))] { false }
 	};
 
-	Ok
-		(tonic_build::configure()
+	Ok(
+		tonic_prost_build::configure()
 			.build_server(server)
 			.build_client(client)
 			.build_transport(transport)
@@ -30,5 +30,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 					"proto/buffer.proto",
 				],
 				&["proto"],
-			)?)
+			)?
+	)
 }
