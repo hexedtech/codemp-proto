@@ -10,19 +10,20 @@ authors = [
 	"cschen <cschen@codemp.dev>"
 ]
 license = "GPL-3.0-only"
-version = "0.7.1"
-edition = "2021"
+version = "0.7.2"
+edition = "2024"
 
 [lib]
 name = "codemp_proto"
 
 [dependencies]
-prost = "0.13"
-uuid = "1.10"
-tonic = { version = "0.12", default-features = false, features = ["codegen", "prost"] }
+prost = "0.14"
+uuid = "1.17"
+tonic = { version = "0.14", default-features = false, features = ["codegen"] }
+tonic-prost = "0.14"
 
 [build-dependencies]
-tonic-build = "0.12"
+tonic-prost-build = "0.14"
 
 [features]
 default = ["client"]
