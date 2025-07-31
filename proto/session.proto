@@ -6,8 +6,8 @@ import "common.proto";
 
 // Manages user workspaces and refreshes tokens.
 service Session {
-	// Get the stream for session events.
-	rpc getEvents (common.Empty) returns (stream SessionEvent);
+	// Attach to a session and receive events.
+	rpc Attach (common.Empty) returns (stream SessionEvent);
 	// Handle a workspace access request and return a workspace token.
 	rpc AccessWorkspace (WorkspaceRequest) returns (common.Token);
 	// Create a workspace.
