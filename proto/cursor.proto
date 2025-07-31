@@ -6,8 +6,16 @@ import "files.proto";
 
 // Handles cursor events and broadcasts them to all users.
 service Cursor {
+	// Retrieves all current cursor positions.	
+	rpc List(common.Empty) returns (CursorEventList);
 	// Subscribe to a workspace's cursor events.
 	rpc Attach (stream cursor.CursorPosition) returns (stream cursor.CursorEvent);
+}
+
+// A message representing a list of cursor events.
+message CursorEventList {
+	// A vector of cursor events.
+	repeated CursorEvent cursors = 1;
 }
 
 // A message representing a position in a buffer.
@@ -31,7 +39,7 @@ message CursorPosition {
 // A message representing a cursor event.
 message CursorEvent {
 	// The user moving the cursor.
-	required common.Identity user = 1;
+	required common.Identifier user = 1;
 	// The new cursor position.
-	required CursorPosition position = 2;
+	repeated CursorPosition position = 2;
 }

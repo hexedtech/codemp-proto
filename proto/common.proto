@@ -8,7 +8,7 @@ message Token {
 }
 
 // Message representing a UUID.
-message Identity {
+message Identifier {
 	// The most significant bits of the UUID.
 	required uint64 hi = 1;
 	// The least significant bits of the UUID.
@@ -18,9 +18,19 @@ message Identity {
 // Message representing a user.
 message User {
 	// The UUID of the user.
-	required Identity id = 1;
+	required Identifier id = 1;
 	// The name of a user.
 	required string name = 2;
+}
+
+// Message representing a workspace.
+message WorkspaceInfo {
+	// The UUID of the workspace.
+	required Identifier id = 1;
+	// The owner of the workspace, for easy namespacing.
+	required User owner = 2;
+	// Mnemonical name of the workspace.
+	required string name = 3;
 }
 
 // A generic empty message.

@@ -10,7 +10,7 @@ authors = [
 	"cschen <cschen@codemp.dev>"
 ]
 license = "GPL-3.0-only"
-version = "0.7.2"
+version = "0.8.0"
 edition = "2024"
 
 [lib]

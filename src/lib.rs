@@ -10,33 +10,33 @@
 pub mod common {
 	tonic::include_proto!("common");
 
-	impl From<uuid::Uuid> for Identity {
+	impl From<uuid::Uuid> for Identifier {
 		fn from(id: uuid::Uuid) -> Self {
 			let (hi, lo) = id.as_u64_pair();
-			Identity { hi, lo }
+			Identifier { hi, lo }
 		}
 	}
 
-	impl From<&uuid::Uuid> for Identity {
+	impl From<&uuid::Uuid> for Identifier {
 		fn from(id: &uuid::Uuid) -> Self {
 			let (hi, lo) = id.as_u64_pair();
-			Identity { hi, lo }
+			Identifier { hi, lo }
 		}
 	}
 
-	impl From<Identity> for uuid::Uuid {
-		fn from(value: Identity) -> Self {
+	impl From<Identifier> for uuid::Uuid {
+		fn from(value: Identifier) -> Self {
 			uuid::Uuid::from_u64_pair(value.hi, value.lo)
 		}
 	}
 
-	impl From<&Identity> for uuid::Uuid {
-		fn from(value: &Identity) -> Self {
+	impl From<&Identifier> for uuid::Uuid {
+		fn from(value: &Identifier) -> Self {
 			uuid::Uuid::from_u64_pair(value.hi, value.lo)
 		}
 	}
 
-	impl Identity {
+	impl Identifier {
 		pub fn uuid(&self) -> uuid::Uuid {
 			uuid::Uuid::from(self)
 		}
@@ -46,26 +46,6 @@ pub mod common {
 /// filetree related types
 pub mod files {
 	tonic::include_proto!("files");
-
-	impl From<String> for BufferNode {
-		fn from(value: String) -> Self {
-			BufferNode { path: value }
-		}
-	}
-
-	impl From<&str> for BufferNode {
-		fn from(value: &str) -> Self {
-			BufferNode {
-				path: value.to_string(),
-			}
-		}
-	}
-
-	impl From<BufferNode> for String {
-		fn from(value: BufferNode) -> Self {
-			value.path
-		}
-	}
 }
 
 /// buffer synchronisation protocol types and procedures
