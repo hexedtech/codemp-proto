@@ -6,7 +6,7 @@ import "common.proto";
 
 // Manages user workspaces and refreshes tokens.
 service Session {
-
+	// Get the stream for session events.
 	rpc getEvents (common.Empty) returns (stream SessionEvent);
 	// Handle a workspace access request and return a workspace token.
 	rpc AccessWorkspace (WorkspaceRequest) returns (common.Token);
@@ -22,7 +22,7 @@ service Session {
 	rpc InviteToWorkspace (InviteRequest) returns (common.Empty);
 }
 
-// A message representing a request for and owned workspace.
+// A message representing a request for an owned workspace.
 message OwnedWorkspaceRequest {
 	// The workspace's name.
 	required string name = 1;
