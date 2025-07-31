@@ -12,6 +12,12 @@ service Cursor {
 	rpc Attach (stream cursor.CursorPosition) returns (stream cursor.CursorEvent);
 }
 
+// A message representing a list of cursor events.
+message CursorEventList {
+	// A vector of cursor events.
+	repeated CursorEvent cursors = 1;
+}
+
 // A message representing a position in a buffer.
 message RowCol {
 	// The row.
