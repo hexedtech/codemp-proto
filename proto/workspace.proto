@@ -85,7 +85,7 @@ message WorkspaceEvent {
 
 	// The union containing actual event.
 	oneof event {
-		UserWorkspaceLeave workspace_join = 1;
+		UserJoinWorkspace workspace_join = 1;
 		UserLeaveWorkspace workspace_leave = 2;
 		FileCreate create = 3;
 		FileRename rename = 4;
