@@ -39,7 +39,7 @@ message CursorUpdate {
 	// The buffer where the cursor is located.
 	required string buffer = 1;
 	// A vector of cursor positions.
-	repeated CursorPosition = 2;
+	repeated CursorPosition cursors = 2;
 }
 
 // A message representing a cursor event.
