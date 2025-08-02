@@ -55,8 +55,8 @@ message WorkspacesOwnedList {
 message InviteRequest {
 	// The user the invitation is for.
 	required string user = 1;
-	// The workspace the invitation is for.
-	required common.Identifier workspace = 2;
+	// The workspace name the invitation is for.
+	required string workspace = 2;
 }
 
 // A message representing a session event.
