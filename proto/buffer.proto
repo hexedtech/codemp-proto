@@ -8,8 +8,6 @@ package buffer;
 service Buffer {
 	// Attach to a buffer and receive operations.
 	rpc Attach (stream Operation) returns (stream BufferEvent);
-	// Kicks all active users from the buffer.
-	rpc KickAll (common.Empty) returns (common.Empty);
 }
 
 // Message representing an operation that has occurred.

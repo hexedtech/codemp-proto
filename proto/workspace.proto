@@ -9,6 +9,8 @@ import "files.proto";
 service Workspace {
 	// Attach to a workspace.
 	rpc Attach (common.Empty) returns (stream WorkspaceEvent);
+	// Kicks all active users from the workspace.
+	rpc KickAll (common.Empty) returns (common.Empty);
 	// Create a buffer within the workspace.
 	rpc CreateBuffer (files.BufferNode) returns (common.Empty);
 	// Access a buffer within the workspace and returns a buffer token for it.
