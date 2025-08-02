@@ -10,16 +10,22 @@ service Session {
 	rpc Attach (common.Empty) returns (stream SessionEvent);
 	// Handle a workspace access request and return a workspace token.
 	rpc AccessWorkspace (WorkspaceRequest) returns (common.Token);
+	// Quit a workspace.
+	rpc QuitWorkspace (WorkspaceRequest) returns (common.Empty);
 	// Create a workspace.
 	rpc CreateWorkspace (OwnedWorkspaceRequest) returns (common.WorkspaceInfo);
 	// Delete a workspace.
 	rpc DeleteWorkspace (OwnedWorkspaceRequest) returns (common.Empty);
 	// List all workspaces the user has been invited to.
 	rpc FetchInvitedWorkspaces (common.Empty) returns (WorkspacesInvitedList);
-	//List all workspaces the user owns.
+	// List all workspaces the user owns.
 	rpc FetchOwnedWorkspaces (common.Empty) returns (WorkspacesOwnedList);
 	// Handle a workspace invite request.
 	rpc InviteToWorkspace (InviteRequest) returns (common.Empty);
+	// Accept a pending invite to a workspace.
+	rpc AcceptInvite (WorkspaceRequest) returns (common.Empty);
+	// Reject a pending invite to a workspace.
+	rpc RejectInvite (WorkspaceRequest) returns (common.Empty);
 }
 
 // A message representing a request for an owned workspace.
