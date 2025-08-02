@@ -12,7 +12,7 @@ service Workspace {
 	// Create a buffer within the workspace.
 	rpc CreateBuffer (files.BufferNode) returns (common.Empty);
 	// Access a buffer within the workspace and returns a buffer token for it.
-	rpc AccessBuffer (files.BufferNode) returns (common.Token);
+	rpc AccessBuffer (files.BufferRequest) returns (common.Token);
 	// Transforms an ephemeral buffer in a persistent one.
 	rpc PinBuffer (files.BufferRequest) returns (common.Empty);
 	// Delete a buffer.
