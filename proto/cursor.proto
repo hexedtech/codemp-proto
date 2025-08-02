@@ -6,10 +6,12 @@ import "common.proto";
 
 // Handles cursor events and broadcasts them to all users.
 service Cursor {
-	// Retrieves all current cursor positions.	
+	// Retrieves all current cursor positions.
 	rpc List(common.Empty) returns (CursorEventList);
 	// Subscribe to a workspace's cursor events.
 	rpc Attach (stream CursorUpdate) returns (stream CursorEvent);
+	// Send the keep alive signal and renew the token.
+	rpc KeepAlive (common.Empty) returns (common.Empty);
 }
 
 // A message representing a list of cursor events.

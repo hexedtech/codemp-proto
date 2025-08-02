@@ -25,6 +25,8 @@ service Workspace {
 	rpc FetchUsers (common.Empty) returns (UserList);
 	// Retrives the users within a given buffer.
 	rpc FetchBufferUsers (files.BufferRequest) returns (UserList);
+	// Send the keep alive signal and renew the token.
+	rpc KeepAlive (common.Empty) returns (common.Empty);
 }
 
 // A message representing a list of users.

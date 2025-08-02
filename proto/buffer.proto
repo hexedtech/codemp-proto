@@ -8,8 +8,8 @@ import "common.proto";
 service Buffer {
 	// Attach to a buffer and receive operations.
 	rpc Attach (stream Operation) returns (stream BufferEvent);
-	// Refresh token
-	rpc Refresh (common.Empty) returns (common.Empty);
+	// Send the keep alive signal and renew the token.
+	rpc KeepAlive (common.Empty) returns (common.Empty);
 }
 
 // Message representing an operation that has occurred.
