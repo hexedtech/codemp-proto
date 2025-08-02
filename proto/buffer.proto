@@ -1,8 +1,8 @@
 syntax = "proto2";
 
-import "common.proto";
-
 package buffer;
+
+import "common.proto";
 
 // Handles buffer changes and keeps users in sync.
 service Buffer {

@@ -36,6 +36,7 @@ message OwnedWorkspaceRequest {
 
 // A message representing a request for a specific workspace.
 message WorkspaceRequest {
+	// The workspace's identifier.
 	required common.Identifier id = 1;
 }
 

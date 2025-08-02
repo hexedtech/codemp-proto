@@ -1,8 +1,8 @@
 syntax = "proto2";
 
 package cursor;
+
 import "common.proto";
-import "files.proto";
 
 // Handles cursor events and broadcasts them to all users.
 service Cursor {
