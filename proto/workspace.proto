@@ -9,12 +9,10 @@ import "files.proto";
 service Workspace {
 	// Attach to a workspace.
 	rpc Attach (common.Empty) returns (stream WorkspaceEvent);
-	// Kicks all active users from the workspace.
-	rpc KickAll (common.Empty) returns (common.Empty);
 	// Create a buffer within the workspace.
 	rpc CreateBuffer (files.BufferNode) returns (common.Empty);
-	// Access a buffer within the workspace and returns a buffer token for it.
-	rpc AccessBuffer (files.BufferRequest) returns (common.Token);
+	// Handle a buffer access request and return a buffer token for it.
+	rpc GetBufferToken (files.BufferRequest) returns (common.Token);
 	// Transforms an ephemeral buffer in a persistent one.
 	rpc PinBuffer (files.BufferRequest) returns (common.Empty);
 	// Delete a buffer.
@@ -25,8 +23,6 @@ service Workspace {
 	rpc FetchUsers (common.Empty) returns (UserList);
 	// Retrives the users within a given buffer.
 	rpc FetchBufferUsers (files.BufferRequest) returns (UserList);
-	// Revokes all invites and kicks all active users.
-	rpc KickAll (common.Empty) returns (common.Empty);
 }
 
 // A message representing a list of users.

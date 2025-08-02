@@ -8,8 +8,8 @@ import "common.proto";
 service Session {
 	// Attach to a session and receive events.
 	rpc Attach (common.Empty) returns (stream SessionEvent);
-	// Handle a workspace access request and return a workspace token.
-	rpc AccessWorkspace (WorkspaceRequest) returns (common.Token);
+	// Handle a workspace access request and return a workspace token for it.
+	rpc GetWorkspaceToken (WorkspaceRequest) returns (common.Token);
 	// Quit a workspace.
 	rpc QuitWorkspace (WorkspaceRequest) returns (common.Empty);
 	// Create a workspace.
