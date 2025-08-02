@@ -14,7 +14,9 @@ service Workspace {
 	// Handle a buffer access request and return a buffer token for it.
 	rpc GetBufferToken (files.BufferRequest) returns (common.Token);
 	// Transforms an ephemeral buffer in a persistent one.
-	rpc PinBuffer (files.BufferRequest) returns (common.Empty);
+	rpc PinBuffer (files.BufferRequest) returns (common.Token);
+	// Transforms a persistent buffer in an ephemeral one.
+	rpc UnPinBuffer (files.BufferRequest) returns (common.Token);
 	// Delete a buffer.
 	rpc DeleteBuffer (files.BufferRequest) returns (common.Empty);
 	// Retrieves the buffers in the workspace that are children of the given path.
