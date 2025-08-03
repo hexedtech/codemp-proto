@@ -11,14 +11,14 @@ service Workspace {
 	rpc Attach (common.Empty) returns (stream WorkspaceEvent);
 	// Create a buffer within the workspace.
 	rpc CreateBuffer (files.BufferNode) returns (common.Empty);
-	// Handle a buffer access request and return a buffer token for it.
-	rpc GetBufferToken (files.BufferRequest) returns (common.Token);
-	// Transforms an ephemeral buffer in a persistent one.
-	rpc PinBuffer (files.BufferRequest) returns (common.Empty);
-	// Transforms a persistent buffer in an ephemeral one.
-	rpc UnPinBuffer (files.BufferRequest) returns (common.Empty);
-	// Delete a buffer.
-	rpc DeleteBuffer (files.BufferRequest) returns (common.Empty);
+	// Handle a buffer access request and return a buffer token for it given it's UUID.
+	rpc GetBufferToken (common.Identifier) returns (common.Token);
+	// Transforms an ephemeral buffer in a persistent one given it's UUID.
+	rpc PinBuffer (common.Identifier) returns (common.Empty);
+	// Transforms a persistent buffer in an ephemeral one given it's UUID.
+	rpc UnPinBuffer (common.Identifier) returns (common.Empty);
+	// Delete a buffer given it's UUID.
+	rpc DeleteBuffer (common.Identifier) returns (common.Empty);
 	// Retrieves the buffers in the workspace that are children of the given path.
 	rpc FetchBuffers (files.BufferRequest) returns (files.BufferTree); 
 	// Retrieves the users in the workspace.
