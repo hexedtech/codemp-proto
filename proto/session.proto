@@ -8,13 +8,13 @@ import "common.proto";
 service Session {
 	// Attach to a session and receive events.
 	rpc Attach (common.Empty) returns (stream SessionEvent);
-	// Handle a workspace access request and return a workspace token for it given it's UUID.
+	// Handle a workspace access request and return a workspace token for it given its UUID.
 	rpc GetWorkspaceToken (common.Identifier) returns (common.Token);
-	// Quit a workspace given it's UUID.
+	// Quit a workspace given its UUID.
 	rpc QuitWorkspace (common.Identifier) returns (common.Empty);
 	// Create a workspace.
 	rpc CreateWorkspace (OwnedWorkspaceRequest) returns (common.WorkspaceInfo);
-	// Delete a workspace given it's UUID.
+	// Delete a workspace given its UUID.
 	rpc DeleteWorkspace (common.Identifier) returns (common.Empty);
 	// List all workspaces the user has been invited to.
 	rpc FetchInvitedWorkspaces (common.Empty) returns (WorkspacesInvitedList);
@@ -22,9 +22,9 @@ service Session {
 	rpc FetchOwnedWorkspaces (common.Empty) returns (WorkspacesOwnedList);
 	// Handle a workspace invite request.
 	rpc InviteToWorkspace (InviteRequest) returns (common.Empty);
-	// Accept a pending invite to a workspace given it's UUID.
+	// Accept a pending invite to a workspace given its UUID.
 	rpc AcceptInvite (common.Identifier) returns (common.Empty);
-	// Reject a pending invite to a workspace given it's UUID.
+	// Reject a pending invite to a workspace given its UUID.
 	rpc RejectInvite (common.Identifier) returns (common.Empty);
 }
 
