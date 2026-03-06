@@ -26,6 +26,14 @@ service Session {
 	rpc AcceptInvite (WorkspaceIdentifier) returns (common.Empty);
 	// Reject a pending invite to a workspace given its UUID.
 	rpc RejectInvite (WorkspaceIdentifier) returns (common.Empty);
+	// Gets a user's full profile.
+	rpc GetUserInfo (UserId) returns (common.UserInfo);
+}
+
+// A message representing a bare user id
+message UserId {
+	// The user unique id (their name)
+	required string user = 1;
 }
 
 // A message identifying a specific owned workspace (meaning, owner is self)
