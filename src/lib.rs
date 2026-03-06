@@ -27,8 +27,8 @@ pub mod files {
 	tonic::include_proto!("files");
 
 	impl BufferPath {
-		pub fn standardize(path: String) -> String {
-			let path_raw = std::path::PathBuf::from_str(&path).expect("infallible");
+		pub fn standardize(path: &str) -> String {
+			let path_raw = std::path::PathBuf::from_str(path).expect("infallible");
 			match path_raw.canonicalize() {
 				Ok(p) => p.display().to_string(),
 				Err(_e) => {
@@ -39,15 +39,15 @@ pub mod files {
 		}
 	}
 
-	impl From<String> for BufferPath {
-		fn from(value: String) -> Self {
-			Self { path: BufferPath::standardize(value) }
+	impl<T: AsRef<str>> From<T> for BufferPath {
+		fn from(value: T) -> Self {
+			Self { path: BufferPath::standardize(value.as_ref()) }
 		}
 	}
 
 	impl From<BufferPath> for String {
 		fn from(value: BufferPath) -> Self {
-			BufferPath::standardize(value.path)
+			BufferPath::standardize(&value.path)
 		}
 	}
 }
