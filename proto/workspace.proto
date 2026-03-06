@@ -12,19 +12,19 @@ service Workspace {
 	// Create a buffer within the workspace.
 	rpc CreateBuffer (files.BufferNode) returns (common.Empty);
 	// Handle a buffer access request and return a buffer token for it given its UUID.
-	rpc GetBufferToken (files.BufferRequest) returns (common.Token);
+	rpc GetBufferToken (files.BufferPath) returns (common.Token);
 	// Transforms an ephemeral buffer in a persistent one given its UUID.
-	rpc PinBuffer (files.BufferRequest) returns (common.Empty);
+	rpc PinBuffer (files.BufferPath) returns (common.Empty);
 	// Transforms a persistent buffer in an ephemeral one given its UUID.
-	rpc UnPinBuffer (files.BufferRequest) returns (common.Empty);
+	rpc UnPinBuffer (files.BufferPath) returns (common.Empty);
 	// Delete a buffer given its UUID.
-	rpc DeleteBuffer (files.BufferRequest) returns (common.Empty);
+	rpc DeleteBuffer (files.BufferPath) returns (common.Empty);
 	// Retrieves the buffers in the workspace.
 	rpc FetchBuffers (common.Empty) returns (files.BufferTree); 
 	// Retrieves the users in the workspace.
 	rpc FetchUsers (common.Empty) returns (UserList);
 	// Retrives the users within a given buffer.
-	rpc FetchBufferUsers (files.BufferRequest) returns (UserList);
+	rpc FetchBufferUsers (files.BufferPath) returns (UserList);
 	// Send the keep alive signal and renew the token.
 	rpc KeepAlive (common.Empty) returns (common.Empty);
 }

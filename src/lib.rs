@@ -22,7 +22,34 @@ pub mod common {
 
 /// filetree related types
 pub mod files {
+    use std::str::FromStr;
+
 	tonic::include_proto!("files");
+
+	impl BufferPath {
+		pub fn standardize(path: String) -> String {
+			let path_raw = std::path::PathBuf::from_str(&path).expect("infallible");
+			match path_raw.canonicalize() {
+				Ok(p) => p.display().to_string(),
+				Err(_e) => {
+					// TODO log it? we don't have tracing here
+					path_raw.display().to_string()
+				},
+			}
+		}
+	}
+
+	impl From<String> for BufferPath {
+		fn from(value: String) -> Self {
+			Self { path: BufferPath::standardize(value) }
+		}
+	}
+
+	impl From<BufferPath> for String {
+		fn from(value: BufferPath) -> Self {
+			BufferPath::standardize(value.path)
+		}
+	}
 }
 
 /// buffer synchronisation protocol types and procedures

@@ -2,8 +2,8 @@ syntax = "proto2";
 
 package files;
 
-// A message representing a buffer request.
-message BufferRequest {
+// A message representing a buffer path.
+message BufferPath {
 	// The path of a buffer.
 	required string path = 1; 
 }
@@ -11,7 +11,7 @@ message BufferRequest {
 // A message representing a node in the filetree.
 message BufferNode {
 	// The path of a buffer.
-	required string path = 1;
+	required BufferPath path = 1;
 	// Whether the buffer is ephemeral;
 	required bool ephemeral = 2;
 }
