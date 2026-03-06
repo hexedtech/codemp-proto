@@ -10,35 +10,12 @@
 pub mod common {
 	tonic::include_proto!("common");
 
-	impl From<uuid::Uuid> for Identifier {
-		fn from(id: uuid::Uuid) -> Self {
-			let (hi, lo) = id.as_u64_pair();
-			Identifier { hi, lo }
-		}
-	}
-
-	impl From<&uuid::Uuid> for Identifier {
-		fn from(id: &uuid::Uuid) -> Self {
-			let (hi, lo) = id.as_u64_pair();
-			Identifier { hi, lo }
-		}
-	}
-
-	impl From<Identifier> for uuid::Uuid {
-		fn from(value: Identifier) -> Self {
-			uuid::Uuid::from_u64_pair(value.hi, value.lo)
-		}
-	}
-
-	impl From<&Identifier> for uuid::Uuid {
-		fn from(value: &Identifier) -> Self {
-			uuid::Uuid::from_u64_pair(value.hi, value.lo)
-		}
-	}
-
-	impl Identifier {
-		pub fn uuid(&self) -> uuid::Uuid {
-			uuid::Uuid::from(self)
+	impl UserInfo {
+		pub fn default_for(username: String) -> Self {
+			Self {
+				name: username,
+				..Default::default()
+			}
 		}
 	}
 }

@@ -47,7 +47,7 @@ message CursorUpdate {
 // A message representing a cursor event.
 message CursorEvent {
 	// The user moving the cursor.
-	required common.Identifier user = 1;
+	required string user = 1;
 	// The new cursor position.
 	required CursorUpdate position = 2;
 }

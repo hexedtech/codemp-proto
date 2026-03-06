@@ -12,13 +12,13 @@ service Workspace {
 	// Create a buffer within the workspace.
 	rpc CreateBuffer (files.BufferNode) returns (common.Empty);
 	// Handle a buffer access request and return a buffer token for it given its UUID.
-	rpc GetBufferToken (common.Identifier) returns (common.Token);
+	rpc GetBufferToken (files.BufferRequest) returns (common.Token);
 	// Transforms an ephemeral buffer in a persistent one given its UUID.
-	rpc PinBuffer (common.Identifier) returns (common.Empty);
+	rpc PinBuffer (files.BufferRequest) returns (common.Empty);
 	// Transforms a persistent buffer in an ephemeral one given its UUID.
-	rpc UnPinBuffer (common.Identifier) returns (common.Empty);
+	rpc UnPinBuffer (files.BufferRequest) returns (common.Empty);
 	// Delete a buffer given its UUID.
-	rpc DeleteBuffer (common.Identifier) returns (common.Empty);
+	rpc DeleteBuffer (files.BufferRequest) returns (common.Empty);
 	// Retrieves the buffers in the workspace.
 	rpc FetchBuffers (common.Empty) returns (files.BufferTree); 
 	// Retrieves the users in the workspace.
@@ -32,7 +32,7 @@ service Workspace {
 // A message representing a list of users.
 message UserList {
 	// A vector of users.
-	repeated common.User users = 1;
+	repeated string users = 1;
 }
 
 // A message representing a workspace event.
@@ -40,13 +40,13 @@ message WorkspaceEvent {
 	// Event that occurs when a user joins a workspace.
 	message UserJoinWorkspace {
 		// The user that joined.
-		required common.User user = 1;
+		required string user = 1;
 	}
 
 	// Event that occurs when a user leaves a workspace.
 	message UserLeaveWorkspace {
 		// The user that left.
-		required common.User user = 1;
+		required string user = 1;
 	}
 
 	// Event that occurs when a file is created in a workspace.
@@ -74,7 +74,7 @@ message WorkspaceEvent {
 	// Event that occurs when a user joins a buffer.
 	message UserJoinBuffer {
 		// The user that joined.
-		required common.User user = 1;
+		required string user = 1;
 		// The buffer the event happened on.
 		required string buffer = 2;
 	}
@@ -82,7 +82,7 @@ message WorkspaceEvent {
 	// Event that occurs when a user leaves a buffer.
 	message UserLeaveBuffer {
 		// The user that left.
-		required common.User user = 1;
+		required string user = 1;
 		// The buffer the event happened on.
 		required string buffer = 2;
 	}

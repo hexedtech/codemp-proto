@@ -25,5 +25,5 @@ message LoginResponse {
 	// The newly created session token.
 	required common.Token token = 1;
 	// The user profile that has been authenticated.
-	required common.User user = 2;
+	required common.UserInfo user = 2;
 }

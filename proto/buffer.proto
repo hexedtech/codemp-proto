@@ -23,5 +23,5 @@ message BufferEvent {
 	// The operation that occurred.
 	required Operation op = 1;
 	// The user that sent this event.
-	required common.Identifier user = 2;
+	required string user = 2;
 }
