@@ -1,38 +1,18 @@
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-	let server = {
-		#[cfg(feature = "server")]
-		{
-			true
-		}
-		#[cfg(not(feature = "server"))]
-		{
-			false
-		}
-	};
+	let server = cfg!(feature = "server");
+	let client = cfg!(feature = "client");
+	let transport = cfg!(any(feature = "server", feature = "client"));
 
-	let client = {
-		#[cfg(feature = "client")]
-		{
-			true
-		}
-		#[cfg(not(feature = "client"))]
-		{
-			false
-		}
-	};
+	#[allow(unused_mut)]
+	let mut builder = tonic_prost_build::configure();
 
-	let transport = {
-		#[cfg(any(feature = "server", feature = "client"))]
-		{
-			true
-		}
-		#[cfg(not(any(feature = "server", feature = "client")))]
-		{
-			false
-		}
-	};
+	#[cfg(feature = "serde")]
+	{
+		builder = builder
+			.type_attribute(".", "#[derive(serde::Serialize, serde::Deserialize)]");
+	}
 
-	Ok(tonic_prost_build::configure()
+	Ok(builder
 		.build_server(server)
 		.build_client(client)
 		.build_transport(transport)

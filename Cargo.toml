@@ -20,6 +20,7 @@ name = "codemp_proto"
 prost = "0.14"
 tonic = { version = "0.14", default-features = false, features = ["codegen"] }
 tonic-prost = "0.14"
+serde = { version = "1.0", features = ["derive"], optional = true }
 
 [build-dependencies]
 tonic-prost-build = "0.14"
@@ -28,3 +29,4 @@ tonic-prost-build = "0.14"
 default = ["client"]
 client = ["tonic/transport"]
 server = ["tonic/transport"]
+serde = ["dep:serde"]
