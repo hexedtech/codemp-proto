@@ -21,7 +21,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	#[cfg(feature = "java")]
 	{
 		builder = builder
-			.message_attribute(".", "#[jni_toolbox::jclass(package = \"mp/code/proto\")]");
+			.message_attribute(".", "#[jni_toolbox::jclass(package = \"mp.code.proto\")]");
 	}
 
 	#[cfg(feature = "js")]
