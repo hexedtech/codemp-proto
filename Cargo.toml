@@ -23,7 +23,7 @@ tonic-prost = "0.14"
 serde = { version = "1.0", features = ["derive"], optional = true }
 # glue (lua)
 mlua = { version = "0.11", features = ["luajit", "serde"], optional = true }
-mlua-serde-derive = { version = "0.1", optional = true }
+mlua-serde-derive = { version = "0.1.1", optional = true }
 # glue (js)
 napi = { version = "3.1", features = ["napi10", "serde-json", "chrono_date"], optional = true } 
 napi-derive = { version="3.1",  optional = true }
