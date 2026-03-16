@@ -9,20 +9,11 @@
 #[allow(non_snake_case)]
 pub mod common {
 	tonic::include_proto!("common");
-
-	impl UserInfo {
-		pub fn default_for(username: String) -> Self {
-			Self {
-				name: username,
-				..Default::default()
-			}
-		}
-	}
 }
 
 /// filetree related types
 pub mod files {
-    use std::str::FromStr;
+	use std::str::FromStr;
 
 	tonic::include_proto!("files");
 
