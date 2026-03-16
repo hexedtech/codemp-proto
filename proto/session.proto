@@ -67,13 +67,13 @@ message InviteRequest {
 // Identifies different kinds of session events
 enum SessionEventKind {
 	// Event that occurs when you get invited to a workspace.
-	InvitationEvent = 0;
+	InvitationEvent = 1;
 	// Event that occurs when a user quits a workspace.
-	QuitEvent = 1;
+	QuitEvent = 2;
 	// Event that occurs when an user accepts an invite to a workspace you are in.
-	AcceptEvent = 2;
+	AcceptEvent = 3;
 	// Event that occurs when an user rejects an invite.
-	RejectEvent = 3;
+	RejectEvent = 4;
 }
 
 // A message representing a session event.

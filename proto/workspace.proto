@@ -38,19 +38,19 @@ message UserList {
 // Identifies different kind of workspace events
 enum WorkspaceEventKind {
 	// Event that occurs when a user joins a workspace.
-	UserJoinWorkspace = 0;
+	UserJoinWorkspace = 1;
 	// Event that occurs when a user leaves a workspace.
-	UserLeaveWorkspace = 1;
+	UserLeaveWorkspace = 2;
 	// Event that occurs when a file is created in a workspace.
-	FileCreate = 2;
+	FileCreate = 3;
 	// Event that occurs when a file is renamed in a workspace.
-	FileRename = 3;
+	FileRename = 4;
 	// Event that occurs when a file is deleted in a workspace.
-	FileDelete = 4;
+	FileDelete = 5;
 	// Event that occurs when a user joins a buffer.
-	UserJoinBuffer = 5;
+	UserJoinBuffer = 6;
 	// Event that occurs when a user leaves a buffer.
-	UserLeaveBuffer = 6;
+	UserLeaveBuffer = 7;
 }
 
 // A message representing a workspace event.
