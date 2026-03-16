@@ -33,7 +33,7 @@ message CursorPosition {
 	// The cursor's start position.
 	required RowCol start = 1;
 	// The cursor's end position.
-	required RowCol end = 2;
+	required RowCol finish = 2;
 }
 
 // A message representing an update to the cursor position.

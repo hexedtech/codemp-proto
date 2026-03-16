@@ -773,6 +773,8 @@ dependencies = [
 [[package]]
 name = "mlua-serde-derive"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8c68d667cdb8a4106f37e339746d046d670f846ce18cc69e9d3319a8e509241f"
 dependencies = [
  "proc-macro2",
  "quote",
