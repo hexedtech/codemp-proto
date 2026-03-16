@@ -12,6 +12,31 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 			.type_attribute(".", "#[derive(serde::Serialize, serde::Deserialize)]");
 	}
 
+	#[cfg(feature = "lua")]
+	{
+		builder = builder
+			.message_attribute(".", "#[derive(mlua_serde_derive::LuaSerde)]");
+	}
+
+	#[cfg(feature = "java")]
+	{
+		builder = builder
+			.message_attribute(".", "#[jni_toolbox::jclass(package = \"mp/code/proto\")]");
+	}
+
+	#[cfg(feature = "js")]
+	{
+		builder = builder
+			.enum_attribute(".", "#[napi_derive::napi]")
+			.message_attribute(".", "#[napi_derive::napi(object)]");
+	}
+
+	#[cfg(feature = "py")]
+	{
+		builder = builder
+			.message_attribute(".", "#[pyo3::pyclass(get_all, from_py_object)]");
+	}
+
 	Ok(builder
 		.build_server(server)
 		.build_client(client)
