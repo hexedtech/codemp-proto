@@ -650,7 +650,7 @@ dependencies = [
 [[package]]
 name = "jni-toolbox"
 version = "0.2.2"
-source = "git+https://github.com/hexedtech/jni-toolbox?rev=c40e925510fd563763db5dec4df300615453054b#c40e925510fd563763db5dec4df300615453054b"
+source = "git+https://github.com/hexedtech/jni-toolbox?rev=9b54289d562f3ba0dfc59ab38342e7502aeb529c#9b54289d562f3ba0dfc59ab38342e7502aeb529c"
 dependencies = [
  "jni",
  "jni-toolbox-macro",
@@ -661,8 +661,9 @@ dependencies = [
 [[package]]
 name = "jni-toolbox-macro"
 version = "0.2.2"
-source = "git+https://github.com/hexedtech/jni-toolbox?rev=c40e925510fd563763db5dec4df300615453054b#c40e925510fd563763db5dec4df300615453054b"
+source = "git+https://github.com/hexedtech/jni-toolbox?rev=9b54289d562f3ba0dfc59ab38342e7502aeb529c#9b54289d562f3ba0dfc59ab38342e7502aeb529c"
 dependencies = [
+ "convert_case",
  "proc-macro2",
  "quote",
  "syn",
