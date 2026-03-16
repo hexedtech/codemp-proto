@@ -64,7 +64,7 @@ message InviteRequest {
 	required string workspace = 2;
 }
 
-/// Identifies different kinds of session events
+// Identifies different kinds of session events
 enum SessionEventKind {
 	// Event that occurs when you get invited to a workspace.
 	InvitationEvent = 0;
@@ -78,7 +78,7 @@ enum SessionEventKind {
 
 // A message representing a session event.
 message SessionEvent {
-	/// The actual kind of session event
+	// The actual kind of session event
 	required SessionEventKind kind = 1;
 	// The user that created this event (sent invitation, rejected invite...)
 	required string user = 2;
