@@ -35,66 +35,34 @@ message UserList {
 	repeated string users = 1;
 }
 
+/// Identifies different kind of workspace events
+enum WorkspaceEventKind {
+	// Event that occurs when a user joins a workspace.
+	UserJoinWorkspace = 0;
+	// Event that occurs when a user leaves a workspace.
+	UserLeaveWorkspace = 1;
+	// Event that occurs when a file is created in a workspace.
+	FileCreate = 2;
+	// Event that occurs when a file is renamed in a workspace.
+	FileRename = 3;
+	// Event that occurs when a file is deleted in a workspace.
+	FileDelete = 4;
+	// Event that occurs when a user joins a buffer.
+	UserJoinBuffer = 5;
+	// Event that occurs when a user leaves a buffer.
+	UserLeaveBuffer = 6;
+}
+
 // A message representing a workspace event.
 message WorkspaceEvent {
-	// Event that occurs when a user joins a workspace.
-	message UserJoinWorkspace {
-		// The user that joined.
-		required string user = 1;
-	}
-
-	// Event that occurs when a user leaves a workspace.
-	message UserLeaveWorkspace {
-		// The user that left.
-		required string user = 1;
-	}
-
-	// Event that occurs when a file is created in a workspace.
-	message FileCreate {
-		// The path of the created file.
-		required string path = 1;
-		// Whether the buffer is ephemeral.
-		required bool ephemeral = 2;
-	}
-
-	// Event that occurs when a file is renamed in a workspace.
-	message FileRename {
-		// The old path of the file.
-		required string before = 1;
-		// The new path of the file.
-		required string after = 2;
-	}
-
-	// Event that occurs when a file is deleted in a workspace.
-	message FileDelete {
-		// The path of the deleted file
-		required string path = 1;
-	}
-
-	// Event that occurs when a user joins a buffer.
-	message UserJoinBuffer {
-		// The user that joined.
-		required string user = 1;
-		// The buffer the event happened on.
-		required string buffer = 2;
-	}
-
-	// Event that occurs when a user leaves a buffer.
-	message UserLeaveBuffer {
-		// The user that left.
-		required string user = 1;
-		// The buffer the event happened on.
-		required string buffer = 2;
-	}
-
-	// The union containing actual event.
-	oneof event {
-		UserJoinWorkspace workspace_join = 1;
-		UserLeaveWorkspace workspace_leave = 2;
-		FileCreate create = 3;
-		FileRename rename = 4;
-		FileDelete delete = 5;
-		UserJoinBuffer buffer_join = 6;
-		UserLeaveBuffer buffer_leave = 7;
-	}
+	/// The event type
+	required WorkspaceEventKind kind = 1;
+	/// The user that joined/left (possibly a buffer)
+	optional string user = 2;
+	/// Path to relevant buffer (deleted/created/left by user...)
+	optional string path = 3;
+	/// Whether relevant buffer is ephemeral
+	optional bool ephemeral = 4;
+	/// If this is a FileRename, new path will be here
+	optional string after = 5;
 }
