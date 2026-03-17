@@ -13,20 +13,13 @@ pub mod common {
 
 /// filetree related types
 pub mod files {
-	use std::str::FromStr;
-
 	tonic::include_proto!("files");
 
 	impl BufferPath {
 		pub fn standardize(path: &str) -> String {
-			let path_raw = std::path::PathBuf::from_str(path).expect("infallible");
-			match path_raw.canonicalize() {
-				Ok(p) => p.display().to_string(),
-				Err(_e) => {
-					// TODO log it? we don't have tracing here
-					path_raw.display().to_string()
-				},
-			}
+			// TODO canonicalize makes it absolute and fails if path doesn't exist
+			//      we need some other way!
+			path.to_string()
 		}
 	}
 
@@ -36,9 +29,9 @@ pub mod files {
 		}
 	}
 
-	impl From<BufferPath> for String {
-		fn from(value: BufferPath) -> Self {
-			BufferPath::standardize(&value.path)
+	impl std::fmt::Display for BufferPath {
+		fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+			write!(f, "{}", BufferPath::standardize(&self.path))
 		}
 	}
 }
