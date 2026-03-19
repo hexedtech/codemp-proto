@@ -51,6 +51,8 @@ enum WorkspaceEventKind {
 	UserJoinBuffer = 6;
 	// Event that occurs when a user leaves a buffer.
 	UserLeaveBuffer = 7;
+	// Event fired when a buffer has its attributes changed
+	FileAttrsUpdated = 8;
 }
 
 // A message representing a workspace event.
@@ -61,8 +63,8 @@ message WorkspaceEvent {
 	optional string user = 2;
 	// Path to relevant buffer (deleted/created/left by user...)
 	optional string path = 3;
-	/// Whether relevant buffer is ephemeral
-	optional bool ephemeral = 4;
+	// If this is a FileCreate or FileAttrsUpdated, the new file attributes
+	optional files.BufferAttributes attributes = 4;
 	// If this is a FileRename, new path will be here
 	optional string after = 5;
 }
