@@ -30,23 +30,23 @@ service Session {
 	rpc GetUserInfo (UserId) returns (common.UserInfo);
 }
 
-// A message representing a bare user id
+// A message representing a bare user id.
 message UserId {
-	// The user unique id (their name)
+	// The user unique id (their name).
 	required string user = 1;
 }
 
-// A message identifying a specific owned workspace (meaning, owner is self)
+// A message identifying a specific owned workspace (meaning, owner is self).
 message OwnedWorkspaceIdentifier {
 	// The workspace's name.
 	required string workspace = 1;
 }
 
-// A message identifying a specific workspace
+// A message identifying a specific workspace.
 message WorkspaceIdentifier {
-	// The workspace's owner
+	// The workspace's owner.
 	required string user = 1;
-	// The workspace's name
+	// The workspace's name.
 	required string workspace = 2;
 }
 
@@ -78,10 +78,10 @@ enum SessionEventKind {
 
 // A message representing a session event.
 message SessionEvent {
-	// The actual kind of session event
+	// The actual kind of session event.
 	required SessionEventKind kind = 1;
-	// The user that created this event (sent invitation, rejected invite...)
+	// The user that created this event (sent invitation, rejected invite...).
 	required string user = 2;
-	// The workspace this event is related to
+	// The workspace this event is related to.
 	required WorkspaceIdentifier workspace = 3;
 }

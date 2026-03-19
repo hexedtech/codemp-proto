@@ -12,13 +12,13 @@ message BufferPath {
 message BufferNode {
 	// The path of a buffer.
 	required BufferPath path = 1;
-	// Attributes of this buffer
+	// Attributes of this buffer.
 	required BufferAttributes attributes = 2;
 }
 
-// Properties and modifiers of a buffer
+// Properties and modifiers of a buffer.
 message BufferAttributes {
-	// Whether the buffer is auto-deleted once everyone has left it
+	// Whether the buffer is auto-deleted once everyone has left it.
 	required bool ephemeral = 1;
 }
 

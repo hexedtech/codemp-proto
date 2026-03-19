@@ -8,11 +8,11 @@ message Token {
 }
 
 message UserInfo {
-	// The user name uniquely identifies it and is immutable
+	// The user name uniquely identifies it and is immutable.
 	required string name = 1;
-	// Users can have a display name, which they can set themselves
+	// Users can have a display name, which they can set themselves.
 	optional string display_name = 2;
-	// Users can have a small description text about themselves ("bio"), maybe linking to their git
+	// Users can have a small description text about themselves ("bio"), maybe linking to their git.
 	optional string description = 3;
 	// Users can have an avatar picture, which some editors can display. This should be small!
 	optional bytes avatar = 4;

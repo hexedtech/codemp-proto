@@ -35,7 +35,7 @@ message UserList {
 	repeated string users = 1;
 }
 
-// Identifies different kind of workspace events
+// Identifies different kind of workspace events.
 enum WorkspaceEventKind {
 	// Event that occurs when a user joins a workspace.
 	UserJoinWorkspace = 1;
@@ -51,20 +51,20 @@ enum WorkspaceEventKind {
 	UserJoinBuffer = 6;
 	// Event that occurs when a user leaves a buffer.
 	UserLeaveBuffer = 7;
-	// Event fired when a buffer has its attributes changed
+	// Event fired when a buffer has its attributes changed.
 	FileAttrsUpdated = 8;
 }
 
 // A message representing a workspace event.
 message WorkspaceEvent {
-	// The event type
+	// The event type.
 	required WorkspaceEventKind kind = 1;
-	// The user that joined/left (possibly a buffer)
+	// The user that joined/left (possibly a buffer).
 	optional string user = 2;
-	// Path to relevant buffer (deleted/created/left by user...)
+	// Path to relevant buffer (deleted/created/left by user...).
 	optional string path = 3;
-	// If this is a FileCreate or FileAttrsUpdated, the new file attributes
+	// If this is a FileCreate or FileAttrsUpdated, the new file attributes.
 	optional files.BufferAttributes attributes = 4;
-	// If this is a FileRename, new path will be here
+	// If this is a FileRename, new path will be here.
 	optional string after = 5;
 }
