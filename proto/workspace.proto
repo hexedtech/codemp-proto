@@ -3,28 +3,28 @@ syntax = "proto2";
 package workspace;
 
 import "common.proto";
-import "files.proto";
+import "buffer.proto";
 
 // Handles workspace state management.
 service Workspace {
 	// Attach to a workspace.
 	rpc Attach (common.Empty) returns (stream WorkspaceEvent);
 	// Create a buffer within the workspace.
-	rpc CreateBuffer (files.BufferNode) returns (common.Empty);
+	rpc CreateBuffer (buffer.BufferNode) returns (common.Empty);
 	// Handle a buffer access request and return a buffer token for it given its UUID.
-	rpc GetBufferToken (files.BufferPath) returns (common.Token);
+	rpc GetBufferToken (buffer.BufferPath) returns (common.Token);
 	// Transforms an ephemeral buffer in a persistent one given its UUID.
-	rpc PinBuffer (files.BufferPath) returns (common.Empty);
+	rpc PinBuffer (buffer.BufferPath) returns (common.Empty);
 	// Transforms a persistent buffer in an ephemeral one given its UUID.
-	rpc UnPinBuffer (files.BufferPath) returns (common.Empty);
+	rpc UnPinBuffer (buffer.BufferPath) returns (common.Empty);
 	// Delete a buffer given its UUID.
-	rpc DeleteBuffer (files.BufferPath) returns (common.Empty);
+	rpc DeleteBuffer (buffer.BufferPath) returns (common.Empty);
 	// Retrieves the buffers in the workspace.
-	rpc FetchBuffers (common.Empty) returns (files.BufferTree); 
+	rpc FetchBuffers (common.Empty) returns (buffer.BufferTree); 
 	// Retrieves the users in the workspace.
 	rpc FetchUsers (common.Empty) returns (UserList);
 	// Retrives the users within a given buffer.
-	rpc FetchBufferUsers (files.BufferPath) returns (UserList);
+	rpc FetchBufferUsers (buffer.BufferPath) returns (UserList);
 	// Send the keep alive signal and renew the token.
 	rpc KeepAlive (common.Empty) returns (common.Empty);
 }
@@ -41,30 +41,30 @@ enum WorkspaceEventKind {
 	UserJoinWorkspace = 1;
 	// Event that occurs when a user leaves a workspace.
 	UserLeaveWorkspace = 2;
-	// Event that occurs when a file is created in a workspace.
-	FileCreate = 3;
-	// Event that occurs when a file is renamed in a workspace.
-	FileRename = 4;
-	// Event that occurs when a file is deleted in a workspace.
-	FileDelete = 5;
 	// Event that occurs when a user joins a buffer.
-	UserJoinBuffer = 6;
+	UserJoinBuffer = 3;
 	// Event that occurs when a user leaves a buffer.
-	UserLeaveBuffer = 7;
+	UserLeaveBuffer = 4;
+	// Event that occurs when a buffer is created in a workspace.
+	BufferCreate = 5;
+	// Event that occurs when a buffer is renamed in a workspace.
+	BufferRename = 6;
+	// Event that occurs when a buffer is deleted in a workspace.
+	BufferDelete = 7;
 	// Event fired when a buffer has its attributes changed.
-	FileAttrsUpdated = 8;
+	BufferAttrsUpdated = 8;
 }
 
 // A message representing a workspace event.
 message WorkspaceEvent {
 	// The event type.
 	required WorkspaceEventKind kind = 1;
-	// The user that joined/left (possibly a buffer).
+	// The user that caused this event.
 	optional string user = 2;
-	// Path to relevant buffer (deleted/created/left by user...).
+	// Path to buffer affected by this event.
 	optional string path = 3;
-	// If this is a FileCreate or FileAttrsUpdated, the new file attributes.
-	optional files.BufferAttributes attributes = 4;
-	// If this is a FileRename, new path will be here.
+	// If this is a BufferCreate or BufferAttrsUpdated, the new buffer attributes.
+	optional buffer.BufferAttributes attributes = 4;
+	// If this is a BufferRename, new path will be here.
 	optional string after = 5;
 }

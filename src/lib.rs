@@ -11,9 +11,9 @@ pub mod common {
 	tonic::include_proto!("common");
 }
 
-/// filetree related types
-pub mod files {
-	tonic::include_proto!("files");
+/// buffer synchronisation protocol types and procedures
+pub mod buffer {
+	tonic::include_proto!("buffer");
 
 	impl BufferPath {
 		pub fn standardize(path: &str) -> String {
@@ -34,11 +34,6 @@ pub mod files {
 			write!(f, "{}", BufferPath::standardize(&self.path))
 		}
 	}
-}
-
-/// buffer synchronisation protocol types and procedures
-pub mod buffer {
-	tonic::include_proto!("buffer");
 }
 
 /// cursor position protocol types and procedures
