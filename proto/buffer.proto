@@ -1,15 +1,15 @@
 syntax = "proto2";
 
-import "common.proto";
-
 package buffer;
+
+import "common.proto";
 
 // Handles buffer changes and keeps users in sync.
 service Buffer {
 	// Attach to a buffer and receive operations.
 	rpc Attach (stream Operation) returns (stream BufferEvent);
-	// Kicks all active users from the buffer.
-	rpc KickAll (common.Empty) returns (common.Empty);
+	// Send the keep alive signal and renew the token.
+	rpc KeepAlive (common.Empty) returns (common.Empty);
 }
 
 // Message representing an operation that has occurred.
@@ -23,5 +23,31 @@ message BufferEvent {
 	// The operation that occurred.
 	required Operation op = 1;
 	// The user that sent this event.
-	required common.Identifier user = 2;
+	required string user = 2;
+}
+
+// A message representing a buffer path.
+message BufferPath {
+	// The path of a buffer.
+	required string path = 1; 
+}
+
+// A message representing a node in the buffer tree.
+message BufferNode {
+	// The path of a buffer.
+	required BufferPath path = 1;
+	// Attributes of this buffer.
+	required BufferAttributes attributes = 2;
+}
+
+// Properties and modifiers of a buffer.
+message BufferAttributes {
+	// Whether the buffer is auto-deleted once everyone has left it.
+	required bool ephemeral = 1;
+}
+
+// A message representing a buffer tree.
+message BufferTree {
+	// A vector of buffer nodes.
+	repeated BufferNode buffers = 1;
 }

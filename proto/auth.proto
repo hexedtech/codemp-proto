@@ -8,7 +8,6 @@ import "common.proto";
 service Auth {
 	// Send credentials, returns valid session token.
 	rpc Login (LoginRequest) returns (LoginResponse);
-
 	// If the given token has recently expired, get a new valid one.
 	rpc Refresh (common.Token) returns (common.Token);
 }
@@ -26,5 +25,5 @@ message LoginResponse {
 	// The newly created session token.
 	required common.Token token = 1;
 	// The user profile that has been authenticated.
-	required common.User user = 2;
+	required common.UserInfo user = 2;
 }

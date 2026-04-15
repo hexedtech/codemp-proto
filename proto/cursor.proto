@@ -1,15 +1,17 @@
 syntax = "proto2";
 
 package cursor;
+
 import "common.proto";
-import "files.proto";
 
 // Handles cursor events and broadcasts them to all users.
 service Cursor {
-	// Retrieves all current cursor positions.	
+	// Retrieves all current cursor positions.
 	rpc List(common.Empty) returns (CursorEventList);
 	// Subscribe to a workspace's cursor events.
-	rpc Attach (stream cursor.CursorPosition) returns (stream cursor.CursorEvent);
+	rpc Attach (stream CursorUpdate) returns (stream CursorEvent);
+	// Send the keep alive signal and renew the token.
+	rpc KeepAlive (common.Empty) returns (common.Empty);
 }
 
 // A message representing a list of cursor events.
@@ -26,20 +28,26 @@ message RowCol {
 	required int32 col = 2;
 }
 
-// A message representing cursor position.
+// A message representing a cursor position.
 message CursorPosition {
-	// The buffer where the cursor is located.
-	required files.BufferNode buffer = 1;
 	// The cursor's start position.
-	required RowCol start = 2;
+	required RowCol start = 1;
 	// The cursor's end position.
-	required RowCol end = 3;
+	required RowCol finish = 2;
+}
+
+// A message representing an update to the cursor position.
+message CursorUpdate {
+	// The buffer where the cursor is located.
+	required string buffer = 1;
+	// A vector of cursor positions.
+	repeated CursorPosition cursors = 2;
 }
 
 // A message representing a cursor event.
 message CursorEvent {
 	// The user moving the cursor.
-	required common.Identifier user = 1;
+	required string user = 1;
 	// The new cursor position.
-	repeated CursorPosition position = 2;
+	required CursorUpdate position = 2;
 }

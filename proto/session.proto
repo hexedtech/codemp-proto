@@ -8,85 +8,80 @@ import "common.proto";
 service Session {
 	// Attach to a session and receive events.
 	rpc Attach (common.Empty) returns (stream SessionEvent);
-	// Handle a workspace access request and return a workspace token.
-	rpc AccessWorkspace (WorkspaceRequest) returns (common.Token);
+	// Handle a workspace access request and return a workspace token for it given its UUID.
+	rpc GetWorkspaceToken (WorkspaceIdentifier) returns (common.Token);
+	// Quit a workspace given its UUID.
+	rpc QuitWorkspace (WorkspaceIdentifier) returns (common.Empty);
 	// Create a workspace.
-	rpc CreateWorkspace (OwnedWorkspaceRequest) returns (common.WorkspaceInfo);
-	// Delete a workspace.
-	rpc DeleteWorkspace (OwnedWorkspaceRequest) returns (common.Empty);
+	rpc CreateWorkspace (OwnedWorkspaceIdentifier) returns (common.Empty);
+	// Delete a workspace given its UUID.
+	rpc DeleteWorkspace (OwnedWorkspaceIdentifier) returns (common.Empty);
 	// List all workspaces the user has been invited to.
-	rpc FetchInvitedWorkspaces (common.Empty) returns (WorkspacesInvitedList);
-	//List all workspaces the user owns.
-	rpc FetchOwnedWorkspaces (common.Empty) returns (WorkspacesOwnedList);
+	rpc FetchInvitedWorkspaces (common.Empty) returns (WorkspacesList);
+	// List all workspaces the user owns.
+	rpc FetchOwnedWorkspaces (common.Empty) returns (WorkspacesList);
 	// Handle a workspace invite request.
 	rpc InviteToWorkspace (InviteRequest) returns (common.Empty);
+	// Accept a pending invite to a workspace given its UUID.
+	rpc AcceptInvite (WorkspaceIdentifier) returns (common.Empty);
+	// Reject a pending invite to a workspace given its UUID.
+	rpc RejectInvite (WorkspaceIdentifier) returns (common.Empty);
+	// Gets a user's full profile.
+	rpc GetUserInfo (UserId) returns (common.UserInfo);
 }
 
-// A message representing a request for an owned workspace.
-message OwnedWorkspaceRequest {
+// A message representing a bare user id.
+message UserId {
+	// The user unique id (their name).
+	required string user = 1;
+}
+
+// A message identifying a specific owned workspace (meaning, owner is self).
+message OwnedWorkspaceIdentifier {
 	// The workspace's name.
-	required string name = 1;
+	required string workspace = 1;
 }
 
-// A message representing a request for a specific workspace.
-message WorkspaceRequest {
-	required common.Identifier id = 1;
+// A message identifying a specific workspace.
+message WorkspaceIdentifier {
+	// The workspace's owner.
+	required string user = 1;
+	// The workspace's name.
+	required string workspace = 2;
 }
 
 // A message representing a list of workspaces.
-message WorkspacesInvitedList {
+message WorkspacesList {
 	// A vector of workspaces the user is invited to.
-	repeated common.WorkspaceInfo invited = 1;
-}
-
-// A message representing a list of workspaces.
-message WorkspacesOwnedList {
-	// A vector of workspaces owned by the user.
-	repeated common.WorkspaceInfo owned = 1;
+	repeated WorkspaceIdentifier workspaces = 1;
 }
 
 // A message representing an invitation to a workspace.
 message InviteRequest {
 	// The user the invitation is for.
 	required string user = 1;
-	// The workspace the invitation is for.
-	required common.Identifier workspace = 2;
+	// The workspace (by name) the invitation is for.
+	required string workspace = 2;
+}
+
+// Identifies different kinds of session events
+enum SessionEventKind {
+	// Event that occurs when you get invited to a workspace.
+	InvitationEvent = 1;
+	// Event that occurs when a user quits a workspace.
+	QuitEvent = 2;
+	// Event that occurs when an user accepts an invite to a workspace you are in.
+	AcceptEvent = 3;
+	// Event that occurs when an user rejects an invite.
+	RejectEvent = 4;
 }
 
 // A message representing a session event.
 message SessionEvent {
-	// Event that occurs when you get invited to a workspace.
-	message InvitationEvent {
-		// The user that invited you.
-		required common.User user = 1;
-		// The workspace the invitation is for.
-		required common.WorkspaceInfo workspace = 2;
-	}
-	// Event that occurs when a user quits a workspace.
-	message QuitEvent {
-		// The user that quits.
-		required common.User user = 1;
-		// The workspace the user quit.
-		required common.WorkspaceInfo workspace = 2;
-	}
-	// Event that occurs when an user accepts an invite to a workspace you are in.
-	message AcceptEvent {
-		// The user that accepted the invite.
-		required common.User user = 1;
-		// The workspace the user accepted the invite for.
-		required common.WorkspaceInfo workspace = 2;
-	}
-	// Event that occurs when an user rejects an invite.
-	message RejectEvent {
-		// The user that rejected the invite.
-		required common.User user = 1;
-		// The workspace the invitation was for.
-		required common.WorkspaceInfo workspace = 2;
-	}
-	oneof event {
-		InvitationEvent invite = 1;
-		QuitEvent leave = 2;
-		AcceptEvent join = 3;
-		RejectEvent reject = 4;
-	}
+	// The actual kind of session event.
+	required SessionEventKind kind = 1;
+	// The user that created this event (sent invitation, rejected invite...).
+	required string user = 2;
+	// The workspace this event is related to.
+	required WorkspaceIdentifier workspace = 3;
 }

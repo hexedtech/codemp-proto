@@ -1,38 +1,43 @@
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-	let server = {
-		#[cfg(feature = "server")]
-		{
-			true
-		}
-		#[cfg(not(feature = "server"))]
-		{
-			false
-		}
-	};
+	let server = cfg!(feature = "server");
+	let client = cfg!(feature = "client");
+	let transport = cfg!(any(feature = "server", feature = "client"));
 
-	let client = {
-		#[cfg(feature = "client")]
-		{
-			true
-		}
-		#[cfg(not(feature = "client"))]
-		{
-			false
-		}
-	};
+	#[allow(unused_mut)]
+	let mut builder = tonic_prost_build::configure();
 
-	let transport = {
-		#[cfg(any(feature = "server", feature = "client"))]
-		{
-			true
-		}
-		#[cfg(not(any(feature = "server", feature = "client")))]
-		{
-			false
-		}
-	};
+	#[cfg(feature = "serde")]
+	{
+		builder = builder
+			.type_attribute(".", "#[derive(serde::Serialize, serde::Deserialize)]");
+	}
 
-	Ok(tonic_prost_build::configure()
+	#[cfg(feature = "lua")]
+	{
+		builder = builder
+			.message_attribute(".", "#[derive(mlua_serde_derive::LuaSerde)]");
+	}
+
+	#[cfg(feature = "java")]
+	{
+		builder = builder
+			.message_attribute(".", "#[jni_toolbox::jclass(package = \"mp.code.proto\")]");
+	}
+
+	#[cfg(feature = "js")]
+	{
+		builder = builder
+			.enum_attribute(".", "#[napi_derive::napi]")
+			.message_attribute(".", "#[napi_derive::napi(object)]");
+	}
+
+	#[cfg(feature = "py")]
+	{
+		builder = builder
+			.message_attribute(".", "#[pyo3::pyclass(get_all, from_py_object)]");
+	}
+
+	Ok(builder
 		.build_server(server)
 		.build_client(client)
 		.build_transport(transport)
@@ -40,7 +45,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 			&[
 				"proto/common.proto",
 				"proto/cursor.proto",
-				"proto/files.proto",
 				"proto/auth.proto",
 				"proto/session.proto",
 				"proto/workspace.proto",

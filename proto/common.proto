@@ -7,30 +7,15 @@ message Token {
 	required string token = 1;
 }
 
-// Message representing a UUID.
-message Identifier {
-	// The most significant bits of the UUID.
-	required uint64 hi = 1;
-	// The least significant bits of the UUID.
-	required uint64 lo = 2;
-}
-
-// Message representing a user.
-message User {
-	// The UUID of the user.
-	required Identifier id = 1;
-	// The name of a user.
-	required string name = 2;
-}
-
-// Message representing a workspace.
-message WorkspaceInfo {
-	// The UUID of the workspace.
-	required Identifier id = 1;
-	// The owner of the workspace, for easy namespacing.
-	required User owner = 2;
-	// Mnemonical name of the workspace.
-	required string name = 3;
+message UserInfo {
+	// The user name uniquely identifies it and is immutable.
+	required string name = 1;
+	// Users can have a display name, which they can set themselves.
+	optional string display_name = 2;
+	// Users can have a small description text about themselves ("bio"), maybe linking to their git.
+	optional string description = 3;
+	// Users can have an avatar picture, which some editors can display. This should be small!
+	optional bytes avatar = 4;
 }
 
 // A generic empty message.

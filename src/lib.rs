@@ -9,48 +9,31 @@
 #[allow(non_snake_case)]
 pub mod common {
 	tonic::include_proto!("common");
-
-	impl From<uuid::Uuid> for Identifier {
-		fn from(id: uuid::Uuid) -> Self {
-			let (hi, lo) = id.as_u64_pair();
-			Identifier { hi, lo }
-		}
-	}
-
-	impl From<&uuid::Uuid> for Identifier {
-		fn from(id: &uuid::Uuid) -> Self {
-			let (hi, lo) = id.as_u64_pair();
-			Identifier { hi, lo }
-		}
-	}
-
-	impl From<Identifier> for uuid::Uuid {
-		fn from(value: Identifier) -> Self {
-			uuid::Uuid::from_u64_pair(value.hi, value.lo)
-		}
-	}
-
-	impl From<&Identifier> for uuid::Uuid {
-		fn from(value: &Identifier) -> Self {
-			uuid::Uuid::from_u64_pair(value.hi, value.lo)
-		}
-	}
-
-	impl Identifier {
-		pub fn uuid(&self) -> uuid::Uuid {
-			uuid::Uuid::from(self)
-		}
-	}
-}
-
-/// filetree related types
-pub mod files {
-	tonic::include_proto!("files");
 }
 
 /// buffer synchronisation protocol types and procedures
 pub mod buffer {
 	tonic::include_proto!("buffer");
+
+	impl BufferPath {
+		pub fn standardize(path: &str) -> String {
+			// TODO canonicalize makes it absolute and fails if path doesn't exist
+			//      we need some other way!
+			path.to_string()
+		}
+	}
+
+	impl<T: AsRef<str>> From<T> for BufferPath {
+		fn from(value: T) -> Self {
+			Self { path: BufferPath::standardize(value.as_ref()) }
+		}
+	}
+
+	impl std::fmt::Display for BufferPath {
+		fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+			write!(f, "{}", BufferPath::standardize(&self.path))
+		}
+	}
 }
 
 /// cursor position protocol types and procedures

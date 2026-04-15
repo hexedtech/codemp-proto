@@ -18,14 +18,31 @@ name = "codemp_proto"
 
 [dependencies]
 prost = "0.14"
-uuid = "1.17"
 tonic = { version = "0.14", default-features = false, features = ["codegen"] }
 tonic-prost = "0.14"
+serde = { version = "1.0", features = ["derive"], optional = true }
+# glue (lua)
+mlua = { version = "0.11", features = ["luajit", "serde"], optional = true }
+mlua-serde-derive = { version = "0.1.1", optional = true }
+# glue (js)
+napi = { version = "3.1", features = ["napi10", "serde-json", "chrono_date"], optional = true } 
+napi-derive = { version="3.1",  optional = true }
+# glue (py)
+pyo3 = { version = "0.28", features = ["multiple-pymethods", "uuid"], optional = true}
+# glue (java)
+jni = { version = "0.22", features = ["invocation"], optional = true }
+jni-toolbox = { git = "https://github.com/hexedtech/jni-toolbox", rev = "9b54289d562f3ba0dfc59ab38342e7502aeb529c", optional = true, features = ["uuid", "unsigned"] }
 
 [build-dependencies]
 tonic-prost-build = "0.14"
 
 [features]
-default = ["client"]
+default = []
 client = ["tonic/transport"]
 server = ["tonic/transport"]
+serde = ["dep:serde"]
+
+lua = ["serde", "dep:mlua", "dep:mlua-serde-derive"]
+js = ["dep:napi", "dep:napi-derive"]
+py = ["dep:pyo3"]
+java = ["dep:jni", "dep:jni-toolbox"]
